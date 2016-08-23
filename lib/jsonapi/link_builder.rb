@@ -35,13 +35,11 @@ module JSONAPI
     end
 
     def relationships_related_link(source, relationship, query_params = {})
-      url = "#{ self_link(source) }/#{ route_for_relationship(relationship) }"
-      url = "#{ url }?#{ query_params.to_query }" if query_params.present?
-      url
+      "/#{relationship.name}?filter[id][equals]=#{source.atlas_place_ids.join(",")}"
     end
 
     def relationships_self_link(source, relationship)
-      "#{ self_link(source) }/relationships/#{ route_for_relationship(relationship) }"
+      nil
     end
 
     def self_link(source)
