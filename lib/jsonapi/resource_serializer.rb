@@ -383,6 +383,10 @@ module JSONAPI
             [type.underscore.pluralize, id]
           end
         end
+      elsif relationship.name == "places"
+        source.atlas_place_ids.map do |id|
+          ["place", id]
+        end
       else
         source.public_send(relationship.name).map do |value|
           [relationship.type, value.id]
