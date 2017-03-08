@@ -35,7 +35,11 @@ module JSONAPI
     end
 
     def relationships_related_link(source, relationship, query_params = {})
-      "/#{relationship.name}?filter[id][equals]=#{source.atlas_place_ids.join(",")}"
+      if relationship.name == "places"
+        "/#{relationship.name}?filter[id][equals]=#{source.atlas_place_ids.join(",")}"
+      elsif relationship.name == "pois"
+        "/#{relationship.name}?filter[id][equals]=#{source.atlas_poi_ids.join(",")}"
+      end
     end
 
     def relationships_self_link(source, relationship)

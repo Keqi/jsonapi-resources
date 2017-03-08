@@ -393,6 +393,10 @@ module JSONAPI
         source.atlas_place_ids.map do |id|
           ["place", id]
         end
+      elsif relationship.name == "pois"
+        source.atlas_poi_ids.map do |id|
+          ["poi", id]
+        end
       else
         source.public_send(relationship.name).map do |value|
           [relationship.type, value.id]
